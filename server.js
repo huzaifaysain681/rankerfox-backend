@@ -32,7 +32,7 @@ let browser;
     try {
         browser = await puppeteer.launch({
             headless: process.env.PUPPETEER_HEADLESS === 'true', // Set headless mode based on .env
-            executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome', // Set Chrome path from .env or default
+            executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome', // Corrected Chrome path
             args: process.env.PUPPETEER_ARGS ? process.env.PUPPETEER_ARGS.split(',') : ['--no-sandbox', '--disable-setuid-sandbox'] // Handle Puppeteer args
         });
         console.log('Puppeteer browser instance started.');
