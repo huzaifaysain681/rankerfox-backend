@@ -13,7 +13,7 @@ app.use(helmet());
 
 // Enable CORS for your frontend origin from .env
 app.use(cors({
-    origin: process.env.FRONTEND_ORIGIN || 'https://frontend.ecom-tools.com/',
+    origin: process.env.FRONTEND_ORIGIN || 'https://frontend.ecom-tools.com',
     methods: ['GET', 'POST'],  // Limit allowed methods
     credentials: true          // Allow cookies to be sent
 }));
@@ -32,7 +32,8 @@ let browser;
     try {
         browser = await puppeteer.launch({
             headless: process.env.PUPPETEER_HEADLESS === 'true', // Set headless mode based on .env
-            args: process.env.PUPPETEER_ARGS ? process.env.PUPPETEER_ARGS.split(',') : [] // Handle Puppeteer args
+            executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome', // Set Chrome path from .env or default
+            args: process.env.PUPPETEER_ARGS ? process.env.PUPPETEER_ARGS.split(',') : ['--no-sandbox', '--disable-setuid-sandbox'] // Handle Puppeteer args
         });
         console.log('Puppeteer browser instance started.');
     } catch (err) {
